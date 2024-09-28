@@ -84,12 +84,12 @@ class ReiseIO:
             """Fehler abfangen wenn ',' anstatt '.' für Kommazahlen eingegeben wird"""
             # endregion
             # evtl. Validierungen hinzufügen für mehrere Transportmittel
+            transportmittel = input("Gebe das Transportmittel ein (nur Auto oder Fahrrad möglich!): ").lower()
             strecke = float(input("Gebe die Strecke in km ein: ").replace(',', '.'))
             reisezeit = float(input("Gebe die Reisezeit in Stunden ein: ").replace(',', '.'))
             # region .lower
             '''.lower wandelt Eingabe in Kleinbuchstaben um -> für Validierung sinnvoll, da einheitlich'''
             # endregion
-            transportmittel = input("Gebe das Transportmittel ein (nur Auto möglich!): ").lower()
 
             # Transportmittel Auto → zusätzliche Eingaben verlangen
             if transportmittel == "auto":
