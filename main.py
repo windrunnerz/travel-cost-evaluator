@@ -149,7 +149,7 @@ if benutzer_eingaben["transportmittel"] == "auto":
                  verbrauch=benutzer_eingaben["verbrauch"]
                  )
     kosten = auto1.berechne_kosten()
-    ReiseIO.ausgabe(kosten)
+    ReiseIO.ausgabe(benutzer_eingaben["transportmittel"], kosten)
 
 elif benutzer_eingaben["transportmittel"] == "fahrrad":
     fahrrad1 = Fahrrad(strecke=benutzer_eingaben["strecke"],

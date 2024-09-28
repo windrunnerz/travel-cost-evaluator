@@ -14,3 +14,6 @@ class ZuFuss(Transportmittel):
         """Rückgabewert, damit das Ergebnis der Kostenberechnung außerhalb der Funktion/Klasse verwendet werden kann"""
         # endregion
         return self.strecke /
+
+
+#  geschwindigkeit, genaue anweisung bei auto
