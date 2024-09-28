@@ -54,9 +54,9 @@ class Fahrrad(Transportmittel):
             geschwindigkeit = 41.4  # km/h
             MET = 17
         # Berechnung Reisezeit (in Stunden)
-        reisezeit = self.strecke / geschwindigkeit
+        self.reisezeit = self.strecke / geschwindigkeit
         # Berechnung kalorienverbrauch
-        kalorienverbrauch = MET * self.koerpergewicht * reisezeit
+        kalorienverbrauch = MET * self.koerpergewicht * self.reisezeit
         # Berechnung Kosten anhand von Döner
         doener_preis = 8 # Euro
         doener_kalorien = 700 # kcal
@@ -65,7 +65,7 @@ class Fahrrad(Transportmittel):
         # region Rückgabewert
         """Rückgabewert, damit das Ergebnis der Kostenberechnung außerhalb der Funktion/Klasse verwendet werden kann"""
         # endregion
-        return kalorienverbrauch, kosten, reisezeit
+        return kalorienverbrauch, kosten, self.reisezeit, anzahl_doener
 #_____________________________________________________________________________
 class ReiseIO:
     """Nimmt Benutzereingaben an und gibt die Gesamtkosten aus"""
@@ -85,11 +85,15 @@ class ReiseIO:
             # endregion
             # evtl. Validierungen hinzufügen für mehrere Transportmittel
             transportmittel = input("Gebe das Transportmittel ein (nur Auto oder Fahrrad möglich!): ").lower()
-            strecke = float(input("Gebe die Strecke in km ein: ").replace(',', '.'))
-            reisezeit = float(input("Gebe die Reisezeit in Stunden ein: ").replace(',', '.'))
-            # region .lower
-            '''.lower wandelt Eingabe in Kleinbuchstaben um -> für Validierung sinnvoll, da einheitlich'''
-            # endregion
+            if transportmittel == "auto":
+                # region .lower
+                '''.lower wandelt Eingabe in Kleinbuchstaben um -> für Validierung sinnvoll, da einheitlich'''
+                # endregion
+                strecke = float(input("Gebe die Strecke in km ein: ").replace(',', '.'))
+                reisezeit = float(input("Gebe die Reisezeit in Stunden ein: ").replace(',', '.'))
+
+            else:
+                strecke = float(input("Gebe die Strecke in km ein: ").replace(',', '.'))
 
             # Transportmittel Auto → zusätzliche Eingaben verlangen
             if transportmittel == "auto":
@@ -125,8 +129,8 @@ class ReiseIO:
         if transportmittel == "auto":
             print(f"Die Gesamtkosten betragen: {kosten:.2f} Euro.")
         elif transportmittel == "fahrrad":
-            print(f"Die Kosten für die Fahrradfahrt betragen {kosten:.2f} Euro bei einer Reisezeit von {reisezeit} Stunden"
-                  f"Dies entsprechen {anzahl_doener:.f} Döner bei einem Durchschnittspreis von 8 Euro.")
+            print(f"Die Kosten für die Fahrradfahrt betragen {kosten:.2f} Euro bei einer Reisezeit von {reisezeit:.2f} Stunden"
+                  f"Dies entsprechen {anzahl_doener:.2f} Döner bei einem Durchschnittspreis von 8 Euro.")
         else:
             print("Transportmittel nicht erkannt")
 
@@ -151,8 +155,8 @@ elif benutzer_eingaben["transportmittel"] == "fahrrad":
     fahrrad1 = Fahrrad(strecke=benutzer_eingaben["strecke"],
                        koerpergewicht=benutzer_eingaben["koerpergewicht"],
                        skill_level=benutzer_eingaben["skill_level"])
-    kalorienverbrauch, kosten, anzahl_doener = fahrrad1.berechne_kosten()
-    ReiseIO.ausgabe(benutzer_eingaben["transportmittel"], kosten, anzahl_doener)
+    kalorienverbrauch, kosten, reisezeit, anzahl_doener = fahrrad1.berechne_kosten()
+    ReiseIO.ausgabe(benutzer_eingaben["transportmittel"], kosten, reisezeit ,anzahl_doener)
 
 
 # Übergabe testen
