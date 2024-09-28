@@ -109,7 +109,7 @@ class ReiseIO:
             # Transportmittel Fahrrad → zusätzliche Eingaben verlangen
             elif transportmittel == "fahrrad":
                 koerpergewicht = float(input("Gebe dein Körpergewicht in kg ein: ").replace(',', '.'))
-                skill_level = float(input(f"Gebe dein Skill Level an (1, 2, 3):\n1: Dreirad\n2: Normal\n3: Triathlon-Profi"))
+                skill_level = float(input(f"Gebe dein Skill Level an (1, 2, 3):\n1: Dreirad\n2: Normal\n3: Triathlon-Profi\n"))
                 return {
                     "transportmittel": transportmittel,
                     "strecke": strecke,
@@ -130,7 +130,7 @@ class ReiseIO:
             print(f"Die Gesamtkosten betragen: {kosten:.2f} Euro.")
         elif transportmittel == "fahrrad":
             print(f"Die Kosten für die Fahrradfahrt betragen {kosten:.2f} Euro bei einer Reisezeit von {reisezeit:.2f} Stunden"
-                  f"Dies entsprechen {anzahl_doener:.2f} Döner bei einem Durchschnittspreis von 8 Euro.")
+                  f"\nDies entsprechen {anzahl_doener:.0f} Döner bei einem Durchschnittspreis von 8 Euro.")
         else:
             print("Transportmittel nicht erkannt")
 
