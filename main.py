@@ -30,21 +30,42 @@ class Auto(Transportmittel):
         # endregion
         return (self.strecke / 100) * self.verbrauch * self. spritkosten
 
-# Unterklasse zu Fuss
-class ZuFuss(Transportmittel):
-    # Faktoren: körperliche Fitness, Alter, Steigung
-    def __init__(self, strecke, reisezeit):
-        geschwindigkeit = 5 # in km/h
+# Unterklasse Fahrrad
+class Fahrrad(Transportmittel):
+    def __init__(self, strecke, koerpergewicht, skill_level, reisezeit=None):
         # region super()
         """super() ruft den Konstruktor der Oberklasse auf, 'strecke' und 'reisezeit' werden korrekt initialisiert und stehen der Unterklasse zur Verfügung"""
         # endregion
         super().__init__(strecke, reisezeit)
+        '''Zuweisung der Parameter zu dem Attribut der Klasse auto. Der Wert von spritkosten wird in das Attribut self.spritkosten gespeichert. Durch das 
+        Präfix self. wird das Attribut dem aktuellen Objekt der Klasse zugeordnet'''
+        self.koerpergewicht = koerpergewicht
+        self.skill_level = skill_level
 
     def berechne_kosten(self):
+        # MET = Metabolischer Äquivalent
+        if self.skill_level == 1:
+            geschwindigkeit = 5 #km/h
+            MET = 2
+        elif self.skill_level == 2:
+            geschwindigkeit = 17.5  # km/h
+            MET = 6.3
+        elif self.skill_level == 3:
+            geschwindigkeit = 41.4  # km/h
+            MET = 17
+        # Berechnung Reisezeit (in Stunden)
+        reisezeit = self.strecke / geschwindigkeit
+        # Berechnung kalorienverbrauch
+        kalorienverbrauch = MET * self.koerpergewicht * reisezeit
+        # Berechnung Kosten anhand von Döner
+        doener_preis = 8 # Euro
+        doener_kalorien = 700 # kcal
+        anzahl_doener = kalorienverbrauch / doener_kalorien
+        kosten = anzahl_doener * doener_preis
         # region Rückgabewert
         """Rückgabewert, damit das Ergebnis der Kostenberechnung außerhalb der Funktion/Klasse verwendet werden kann"""
         # endregion
-        return (self.strecke / 100) * self.verbrauch * self. spritkosten
+        return kalorienverbrauch, kosten, reisezeit
 #_____________________________________________________________________________
 class ReiseIO:
     """Nimmt Benutzereingaben an und gibt die Gesamtkosten aus"""
@@ -81,8 +102,18 @@ class ReiseIO:
                     "spritkosten": spritkosten,
                     "verbrauch": verbrauch
                 }
+            # Transportmittel Fahrrad → zusätzliche Eingaben verlangen
+            elif transportmittel == "fahrrad":
+                koerpergewicht = float(input("Gebe dein Körpergewicht in kg ein: ").replace(',', '.'))
+                skill_level = float(input(f"Gebe dein Skill Level an (1, 2, 3):\n1: Dreirad\n2: Normal\n3: Triathlon-Profi"))
+                return {
+                    "transportmittel": transportmittel,
+                    "strecke": strecke,
+                    "koerpergewicht": koerpergewicht,
+                    "skill_level": skill_level
+                }
             else:
-                print("Transportmittel nur Auto möglich! Bitte erneut eingeben.")
+                print("Transportmittel nur Auto oder Fahrrad möglich! Bitte erneut eingeben.")
 
     # region Parameter kosten
     '''kosten wird in berechne_kosten() der class Auto berechnet und in kosten gespeichert. Der Parameter in
@@ -90,11 +121,15 @@ class ReiseIO:
     Daten hat. Ohne diesen Parameter würde die Methode nicht wissen, welchen Wert sie ausgeben soll.'''
     # endregion
     @staticmethod
-    def ausgabe(kosten):
-        # region Formatierung
-        """Formatierungsanweisungen nur möglich in f-strings oder der Methode format()"""
-        # endregion
-        print(f"Die Gesamtkosten betragen: {kosten:.2f} Euro.")
+    def ausgabe(transportmittel, kosten, reisezeit=None, anzahl_doener=None):
+        if transportmittel == "auto":
+            print(f"Die Gesamtkosten betragen: {kosten:.2f} Euro.")
+        elif transportmittel == "fahrrad":
+            print(f"Die Kosten für die Fahrradfahrt betragen {kosten:.2f} Euro bei einer Reisezeit von {reisezeit} Stunden"
+                  f"Dies entsprechen {anzahl_doener:.f} Döner bei einem Durchschnittspreis von 8 Euro.")
+        else:
+            print("Transportmittel nicht erkannt")
+
 
 # Hauptprogramm
 reise_io = ReiseIO()
@@ -111,6 +146,13 @@ if benutzer_eingaben["transportmittel"] == "auto":
                  )
     kosten = auto1.berechne_kosten()
     ReiseIO.ausgabe(kosten)
+
+elif benutzer_eingaben["transportmittel"] == "fahrrad":
+    fahrrad1 = Fahrrad(strecke=benutzer_eingaben["strecke"],
+                       koerpergewicht=benutzer_eingaben["koerpergewicht"],
+                       skill_level=benutzer_eingaben["skill_level"])
+    kalorienverbrauch, kosten, anzahl_doener = fahrrad1.berechne_kosten()
+    ReiseIO.ausgabe(benutzer_eingaben["transportmittel"], kosten, anzahl_doener)
 
 
 # Übergabe testen
