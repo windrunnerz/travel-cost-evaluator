@@ -16,4 +16,5 @@ class ZuFuss(Transportmittel):
         return self.strecke /
 
 
-#  geschwindigkeit, genaue anweisung bei auto
+# geschwindigkeit, genaue anweisung bei auto, schmerzgrenze wie viel mehr zahlen für weniger kosten oder zeit
+# wie viel ist dir zeit wert / was ist dir mehre wert zeit oder geld?
