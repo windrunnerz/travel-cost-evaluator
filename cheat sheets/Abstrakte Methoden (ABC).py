@@ -60,3 +60,22 @@ class Transportmittel:
 # Durch die Verwendung von abstrakten Klassen und Methoden kannst du sicherstellen, dass dein Code konsistent ist und
 # alle Unterklassen die erforderlichen Methoden bieten, was zu einer besseren Wartbarkeit und Qualität führt.
 
+# Wichtige Punkte:
+# 1. Erbe von ABC:
+#   - Eine Klasse wird zur abstrakten Klasse, indem sie von ABC (Abstract Base Class) erbt. Dies zeigt an, dass die
+#   Klasse möglicherweise abstrakte Methoden enthält.
+# 2. Verwendung von @abstractmethod:
+#   - Der Dekorator @abstractmethod markiert eine Methode als abstrakt, sodass jede Unterklasse gezwungen ist, diese
+#   Methode zu implementieren.
+# 3. Nicht instanziierbar:
+#   - Eine abstrakte Klasse kann nicht direkt instanziiert werden. Das bedeutet, du kannst nicht einfach ein Objekt der
+#   abstrakten Klasse Transportmittel erstellen. Stattdessen musst du eine Unterklasse verwenden, die die abstrakten
+#   Methoden implementiert.
+#
+# Warum werden abstrakte Methoden verwendet?
+#   - Vorlagen und Schnittstellen: Sie bieten eine Art Vorlage für alle Unterklassen. Dadurch kann sichergestellt
+#   werden, dass alle Unterklassen bestimmte Methoden besitzen, die eine konsistente Schnittstelle bieten.
+#   - Vermeidung von Implementierungsdetails: In der Oberklasse werden keine Details der Methode spezifiziert. Die
+#   Details überlässt man den spezifischen Unterklassen, was zu einer flexibleren und besser strukturierten Codebasis
+#   führt.
+

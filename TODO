@@ -11,3 +11,68 @@
 ## verschiedene Transportmittel vergleichbar
 ## Abfrage persönliche Schmerzgrenze
 ## GUI
+
+
+
+
+# @staticmethod
+    def ausgabe(transportmittel, kosten, reisezeit=None, anzahl_doener=None, ticketpreis=None):
+        # kosten wird in berechne_kosten() der class Auto berechnet und in kosten gespeichert. Der Parameter in
+        # ausgabe(kosten) ist notwendig, da die Methode ausgabe selbst nicht direkt Zugriff auf andere Methoden oder
+        # Daten hat. Ohne diesen Parameter würde die Methode nicht wissen, welchen Wert sie ausgeben soll.
+        if transportmittel == "auto":
+
+        elif transportmittel == "fahrrad":
+
+        elif transportmittel == "bus":
+
+        elif transportmittel == "zug":
+
+        else:
+            print("Transportmittel nicht erkannt")
+
+
+# Erzeugt ein Objekt, je nach Transportmittel
+if benutzer_eingaben["transportmittel"] == "auto":
+    auto1 = Auto(strecke=benutzer_eingaben["strecke"],
+                 reisezeit=benutzer_eingaben["reisezeit"],
+                 spritkosten=benutzer_eingaben["spritkosten"],
+                 verbrauch=benutzer_eingaben["verbrauch"]
+                 )
+    kosten = auto1.berechne_kosten()
+    ReiseIO.ausgabe(benutzer_eingaben["transportmittel"], kosten)
+
+
+elif benutzer_eingaben["transportmittel"] == "fahrrad":
+    fahrrad1 = Fahrrad(strecke=benutzer_eingaben["strecke"],
+                       koerpergewicht=benutzer_eingaben["koerpergewicht"],
+                       skill_level=benutzer_eingaben["skill_level"])
+    kalorienverbrauch, kosten, reisezeit, anzahl_doener = fahrrad1.berechne_kosten()
+    ReiseIO.ausgabe(benutzer_eingaben["transportmittel"], kosten, reisezeit, anzahl_doener)
+
+
+elif benutzer_eingaben["transportmittel"] == "bus":
+    bus1 = Bus(strecke=benutzer_eingaben["strecke"],
+               reisezeit=benutzer_eingaben["reisezeit"],
+               ticketpreis=benutzer_eingaben["ticketpreis"]
+               )
+    kosten = bus1.berechne_kosten()
+    ReiseIO.ausgabe(benutzer_eingaben["transportmittel"],
+                    kosten,
+                    benutzer_eingaben["reisezeit"],
+                    benutzer_eingaben["ticketpreis"]
+                    )
+    # keine lokalen Variablen definiert wie in Auto, deshalb muss aus dem dict die reisezeit übernommen werden, um
+    # korrekt an ausgabe() zu übergeben
+
+elif benutzer_eingaben["transportmittel"] == "zug":
+    zug1 = Zug(strecke=benutzer_eingaben["strecke"],
+               reisezeit=benutzer_eingaben["reisezeit"],
+               ticketpreis=benutzer_eingaben["ticketpreis"]
+               )
+    kosten = zug1.berechne_kosten()
+    ReiseIO.ausgabe(benutzer_eingaben["transportmittel"],
+                    kosten,
+                    benutzer_eingaben["reisezeit"],
+                    benutzer_eingaben["ticketpreis"]
+                    )
