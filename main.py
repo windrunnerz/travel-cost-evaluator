@@ -1,5 +1,6 @@
 # transportmittel: bus, bahn, auto, flugzeug, fahrrad, zu fuss, e-scooter
 from abc import ABC, abstractmethod
+from idlelib.pyparse import trans
 
 
 # Oberklasse
@@ -81,9 +82,9 @@ class Fahrrad(Transportmittel):
     def ausgabe_details(self):
         kalorienverbrauch, kosten, reisezeit, anzahl_doener = self.berechne_kosten()
         print(
-            f"Die Kosten für die Fahrradfahrt betragen {kosten: .2f} Euro bei einer Reisezeit von {reisezeit: .2f}"
-            f" Stunden "
-            f"\nDies entsprechen {anzahl_doener: .0f} Döner bei einem Durchschnittspreis von 8 Euro.")
+            f"Die Kosten für die Fahrradfahrt betragen{kosten: .2f} Euro bei einer Reisezeit von{reisezeit: .2f}"
+            f" Stunden."
+            f"\nDies entsprechen{anzahl_doener: .0f} Döner bei einem Durchschnittspreis von 8 Euro.")
 
 
 # Unterklasse Bus
@@ -97,7 +98,8 @@ class Bus(Transportmittel):
 
     def ausgabe_details(self):
         kosten = self.berechne_kosten()
-        print(f"Die Kosten für die Busfahrt betragen {kosten: .2f} Euro bei einer Reisezeit von {self.reisezeit: .2f}.")
+        print(f"Die Kosten für die Busfahrt betragen{kosten: .2f} Euro bei einer Reisezeit von{self.reisezeit: .2f}"
+              f" Stunden.")
 
 
 class Zug(Transportmittel):
@@ -110,7 +112,8 @@ class Zug(Transportmittel):
 
     def ausgabe_details(self):
         kosten = self.berechne_kosten()
-        print(f"Die Kosten für die Zugfahrt betragen {kosten: .2f} Euro bei einer Reisezeit von {self.reisezeit: .2f}.")
+        print(f"Die Kosten für die Zugfahrt betragen{kosten: .2f} Euro bei einer Reisezeit von{self.reisezeit: .2f}"
+              f" Stunden.")
 
 
 # _____________________________________________________________________________
@@ -144,6 +147,8 @@ class ReiseIO:
         strecke, reisezeit = None, None
         if transportmittel_input in ["auto", "bus", "zug"]:
             strecke, reisezeit = ReiseIO.standard_eingabe()
+        elif transportmittel_input == "fahrrad":
+            strecke = float(input("Gebe die Strecke in km ein: ").replace(',', '.'))
 
         # zusätzliche Eingaben basierend auf Transportmittel
         if transportmittel_input == "auto":
@@ -157,7 +162,7 @@ class ReiseIO:
                 "verbrauch": verbrauch
             }
 
-        elif transportmittel == "fahrrad":
+        elif transportmittel_input == "fahrrad":
             koerpergewicht = float(input("Gebe dein Körpergewicht in kg ein: ").replace(',', '.'))
             skill_level = int(
                 input(f"Gebe dein Skill Level an (1, 2, 3): \n1: Dreirad\n2: Normal\n3: Triathlon-Profi\n"))
@@ -168,9 +173,8 @@ class ReiseIO:
                 "skill_level": skill_level
             }
 
-        elif transportmittel == "bus":
+        elif transportmittel_input == "bus":
             ticketpreis = float(input("Wie viel kostet das Busticket in Euro?: "))
-            reisezeit = float(input("Wie lange dauert die Busfahrt in Stunden?: "))
             return {
                 "transportmittel": transportmittel_input,
                 "strecke": strecke,
@@ -178,9 +182,8 @@ class ReiseIO:
                 "ticketpreis": ticketpreis
             }
 
-        elif transportmittel == "zug":
+        elif transportmittel_input == "zug":
             ticketpreis = float(input("Wie viel kostet das Zugticket in Euro?: "))
-            reisezeit = float(input("Wie lange dauert die Zugfahrt in Stunden?: "))
             return {
                 "transportmittel": transportmittel_input,
                 "strecke": strecke,

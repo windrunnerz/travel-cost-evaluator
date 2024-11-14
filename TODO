@@ -1,6 +1,7 @@
 # Ausgabe polymorph gestalten
 # Benutzerfreundlichkeit verbessern mit try except
 # recherche Utility Class, abstract method
+# hilfsfunktion erzeuge_transportmittel um mehrere Eingaben in einer List zu speichern
 
 
 
