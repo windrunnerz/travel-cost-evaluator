@@ -10,7 +10,7 @@ class Transportmittel(ABC):
         self.strecke = strecke
         self.reisezeit = reisezeit
 
-    # Platzhalter, abstrakte Methode die signalisiert, dass jede Unterklasse ihre eigene Implementierung dieser
+    # @abstractmethod, abstrakte Methode die signalisiert, dass jede Unterklasse ihre eigene Implementierung dieser
     # Methode bereitstellen muss. NotImplementedError ist eine eingebaute Exception-Klasse in Python → signalisiert
     # Fehlerzustände
     @abstractmethod
@@ -20,7 +20,6 @@ class Transportmittel(ABC):
     @abstractmethod
     def ausgabe_details(self):
         pass
-    # @abstractmethod zeigt an, dass jede Unterklasse diese Methode implementieren muss
 
 
 # Unterklasse Auto
@@ -191,7 +190,7 @@ class ReiseIO:
 
 if __name__ == "__main__":
     # Hauptprogramm
-    reise_io = ReiseIO()
+    reise_io = ReiseIO()    # s. Erklärungen 1.
     benutzer_eingaben = ReiseIO.eingabe()
 
     transportmittel = None

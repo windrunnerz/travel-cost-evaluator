@@ -1,0 +1,16 @@
+1. Mit reise_io = ReiseIO()  wird eine Instanz der Klasse ReiseIO erstellt.
+Also ein Objekt vom Typ ReiseIO.
+- Die Klasse ReiseIO dient als Vorlage (Klassendefinition) um ein neues Objekt
+  zu erstellen.
+- Python reserviert Speicherplatz für das Objekt, um all seine Attribute und
+  Methoden zu speichern.
+- reise_io wird zur Referenz auf das neue Objekt und kann alle Methoden und Attribute
+  der Klasse ReiseIO nutzen.
+
+Warum wird das gemacht?
+Das Erstellen einer Instanz (reise_io) erlaubt es, die Methoden und Funktionen der
+Klasse zu verwenden. Es können unterschiedliche Objekte erstellt werden, die alle die
+Methoden der Klasse erben und verwenden können.
+
+da eingabe() eine statische Methode ist (@staticmethod) kann sie auch direkt über die
+Klasse ReiseIO() aufgerufen werden, ohne dafür eine Instanz zu erstellen.
