@@ -1,8 +1,10 @@
-# Ausgabe polymorph gestalten
+# x Ausgabe polymorph gestalten
 # Benutzerfreundlichkeit verbessern mit try except
 # recherche Utility Class, abstract method
 # hilfsfunktion erzeuge_transportmittel um mehrere Eingaben in einer List zu speichern
-
+# transportmittel_input aus eingabe() und transportmittel aus main
+  vereinheitlichen
+#
 
 
 
