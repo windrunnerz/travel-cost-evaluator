@@ -1,6 +1,5 @@
 # transportmittel: bus, bahn, auto, flugzeug, fahrrad, zu fuss, e-scooter
 from abc import ABC, abstractmethod
-from idlelib.pyparse import trans
 
 
 # Oberklasse
