@@ -1,0 +1,34 @@
+🔹 Absolute Importe
+Ein absoluter Import gibt den vollständigen Pfad vom Projekt-Hauptverzeichnis aus an.
+
+➤ Wann?
+Wenn du außerhalb des Pakets arbeitest (z.B. in main.py).
+Wenn du von einem Modul auf das gesamte Paket zugreifen willst.
+
+from src import Auto
+from src.transportmittel import Transportmittel
+
+🔹 Relative Importe
+Ein relativer Import bezieht sich auf die Position des aktuellen Moduls innerhalb des Pakets.
+
+➤ Wann?
+Wenn du innerhalb des Pakets bist (z.B. in src/auto.py) und auf andere Module im selben Paket zugreifen willst.
+Vermeidet harte Pfadangaben und hält interne Abhängigkeiten flexibel.
+
+➤ Syntax:
+.	Aktuelles Verzeichnis
+..	Übergeordnetes Verzeichnis
+
+from .transportmittel import Transportmittel
+from ..common.utils import Hilfsfunktion
+
+🔹 Vorteile:
+Absolute Importe:
+Klar, eindeutig, gut für externe Zugriffe.
+
+Relative Importe:
+Flexibel für interne Strukturänderungen, wenn Module innerhalb eines Pakets miteinander arbeiten.
+
+🔹 Empfehlung:
+Innerhalb von Paketen → relative Importe (.), wenn innerhalb von src importiert werden soll.
+Außerhalb des Pakets → absolute Importe (src.), wenn in main importiert werden soll.

@@ -1,3 +1,6 @@
+from .transportmittel import Transportmittel
+
+
 class Zug(Transportmittel):
     def __init__(self, strecke, reisezeit, ticketpreis):
         super().__init__(strecke, reisezeit)

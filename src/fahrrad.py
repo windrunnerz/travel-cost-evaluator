@@ -1,3 +1,6 @@
+from .transportmittel import Transportmittel
+
+
 class Fahrrad(Transportmittel):
     def __init__(self, strecke, koerpergewicht, skill_level, reisezeit=None):
 

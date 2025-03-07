@@ -1,3 +1,6 @@
+from .transportmittel import Transportmittel
+
+
 class Auto(Transportmittel):
     def __init__(self, strecke, reisezeit, spritkosten, verbrauch):
         super().__init__(strecke, reisezeit)
