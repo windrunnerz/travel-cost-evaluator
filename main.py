@@ -1,5 +1,5 @@
 # transportmittel: bus, bahn, auto, flugzeug, fahrrad, zu fuss, e-scooter
-from src import Auto, Fahrrad, Bus, Zug, ReiseIO, transportmittel_factory
+from src import ReiseIO, transportmittel_factory
 
 if __name__ == "__main__":
     benutzer_eingaben = ReiseIO.eingabe()

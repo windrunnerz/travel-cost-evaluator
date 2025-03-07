@@ -17,3 +17,4 @@ def transportmittel_factory(benutzer_eingaben):
     argumente = {k: v for k, v in benutzer_eingaben.items() if k != "transportmittel"}
 
     return klassen_mapping[typ](**argumente)
+    # klasse = klassen_mapping[typ]
