@@ -1,0 +1,55 @@
+Definition von Paketen in Python:
+
+Ein Paket ist ein Verzeichnis, das Python als Container für Module dient. Damit Python einen Ordner als Paket erkennt,
+muss er eine Datei namens __init__.py enthalten. Pakete ermöglichen es, deinen Code in logisch zusammengehörige,
+wiederverwendbare und voneinander unabhängige Module zu unterteilen, was die Organisation, Wartbarkeit und
+Wiederverwendbarkeit deines Codes verbessert.
+
+1. Was ist __init__.py?
+Paketkennzeichnung:
+Eine leere (oder mit Code versehene) Datei, die Python signalisiert, dass der Ordner als Paket behandelt wird.
+Initialisierung:
+Führt Code aus, wenn das Paket importiert wird (z.B. Konfigurationen oder Imports).
+
+2. Warum verwenden?
+Organisieren des Codes:
+Teilt den Code in logische Module, z.B. src/ für Produktionscode.
+Re-Export:
+Ermöglicht es, Klassen oder Funktionen aus Untermodulen direkt über das Paket zugänglich zu machen, ohne den internen
+Modulpfad zu kennen.
+
+Re-Export in __init__.py
+Definition:
+Importiere z.B. eine Klasse aus einem Modul (z.B. auto.py) und stelle sie im Paket zur Verfügung.
+Beispiel:
+In src/__init__.py:
+
+from .auto import Auto
+from .fahrrad import Fahrrad
+
+Ermöglicht in main.py:
+
+from src import Auto, Fahrrad
+
+ohne zu wissen, dass Auto in auto.py definiert ist.
+Ohne __init__.py müsste direkt aus dem Modul importiert werden:
+In main.py:
+
+from src.auto import Auto
+from src.fahrrad import Fahrrad
+
+4. Relative Importe
+Syntax:
+Der Punkt (.) vor dem Modulnamen steht für das aktuelle Paket.
+Beispiel: from .auto import Auto
+heißt: „Importiere Auto aus dem Modul auto.py im gleichen Verzeichnis (Paket)“.
+Mehrere Punkte:
+Mit .. gehst du ein Verzeichnis höher, nützlich für verschachtelte Pakete.
+
+5. Best Practices
+Trennung von Kernlogik und Anwendungslogik:
+Produktionscode (Kernlogik) in src/, Benutzer-/Einstiegscode in main.py.
+Re-Export nutzen:
+Erleichtert den Import in anderen Teilen der Anwendung.
+Saubere Imports:
+Verwende relative Importe in __init__.py für eine übersichtliche Struktur.
