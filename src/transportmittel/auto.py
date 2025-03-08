@@ -1,4 +1,4 @@
-from .transportmittel import Transportmittel
+from src.transportmittel import Transportmittel
 
 
 class Auto(Transportmittel):
