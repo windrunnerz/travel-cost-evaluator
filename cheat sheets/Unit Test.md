@@ -11,4 +11,5 @@ Unit Tests sind automatisierte Tests, die kleinste Einheiten deines Codes (meist
 
 ✅ Wie schreibt man einen Unit Test in Python?
 Du nutzt das Modul unittest.
-Das ist die Standard-Testbibliothek von Python.
+Das ist die Standard-Testbibliothek von Python.  
+Oder New -> Python file -> Python unit test
