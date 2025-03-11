@@ -1,13 +1,11 @@
-# transportmittel: bus, bahn, auto, flugzeug, fahrrad, zu fuss, e-scooter
 from src import ReiseIO, create_transportmittel
-import cli_interface
 
 
-def main():
+def cli_main():
     benutzer_eingaben = ReiseIO.eingabe()
     transportmittel = create_transportmittel(benutzer_eingaben)
     transportmittel.ausgabe_details()
 
 
 if __name__ == "__main__":
-    cli_interface.cli_main()
+    cli_main()
