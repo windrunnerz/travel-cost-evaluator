@@ -42,7 +42,9 @@ Und Auto(**argumente) wird dann zu:
 ```python
 Auto(strecke=100, reisezeit=2)
 ```
-Python nimmt automatisch die Schlüssel als Namen der Argumente und die Werte als deren Inhalt.
+Python nimmt automatisch die Schlüssel als Namen der Argumente und die Werte als deren Inhalt.  
+„Hier kommt ein Dictionary mit Schlüssel-Wert-Paaren, die ich als benannte Argumente an die Funktion/Klasse übergeben 
+möchte.“  
 
 🔔 Merksatz:  
 **Benannte Argumente geben den Parametern beim Aufruf direkt Namen.
@@ -60,6 +62,4 @@ Oder auch:
 * „Doppelstern-Operator“ (eingedeutscht).  
 Er signalisiert Python:
 
-„Hier kommt ein Dictionary mit Schlüssel-Wert-Paaren, die ich als benannte Argumente an die Funktion/Klasse übergeben 
-möchte.“  
 In Doku, Tutorials und StackOverflow liest du meistens „Keyword Arguments“ oder „Kwargs“.

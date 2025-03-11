@@ -1,7 +1,7 @@
 from . import Auto, Fahrrad, Bus, Zug
 
 
-def transportmittel_factory(benutzer_eingaben):
+def create_transportmittel(benutzer_eingaben):
     typ = benutzer_eingaben["transportmittel"]
 
     klassen_mapping = {
