@@ -1,8 +1,10 @@
-from src import ReiseIO, create_transportmittel
+from .eingaben_reise import frage_transportmittel
+from .transportmittel_factory import create_transportmittel
 
 
 def cli_main():
-    benutzer_eingaben = ReiseIO.eingabe()
+
+    benutzer_eingaben = frage_transportmittel()
     transportmittel = create_transportmittel(benutzer_eingaben)
     transportmittel.ausgabe_details()
 
