@@ -1,6 +1,5 @@
 # transportmittel: bus, bahn, auto, flugzeug, fahrrad, zu fuss, e-scooter
-from src import ReiseIO, create_transportmittel
-import cli_interface
+from src import ReiseIO, create_transportmittel, cli_main
 
 
 def main():
@@ -10,4 +9,4 @@ def main():
 
 
 if __name__ == "__main__":
-    cli_interface.cli_main()
+    cli_main()
