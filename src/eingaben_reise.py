@@ -1,4 +1,10 @@
-def frage_transportmittel():
+def frage_transportmittel() -> dict:
+    """
+    Zentrale Eingabefunktion, die alles koordiniert.
+
+    Returns:
+        dict: Nutzereingaben aus Unterfunktionen
+    """
     while True:
         transportmittel_input = input(
             "Gebe das Transportmittel ein (nur Auto, Bus, Zug oder Fahrrad möglich!): ").lower().strip()

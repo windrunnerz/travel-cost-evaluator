@@ -3,7 +3,6 @@ from .transportmittel_factory import create_transportmittel
 
 
 def cli_main():
-
     benutzer_eingaben = frage_transportmittel()
     transportmittel = create_transportmittel(benutzer_eingaben)
     transportmittel.ausgabe_details()
