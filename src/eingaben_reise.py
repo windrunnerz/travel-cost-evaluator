@@ -11,11 +11,10 @@ def frage_transportmittel():
     mapping = {
         "auto": eingabe_auto,
         "fahrrad": eingabe_fahrrad,
-        "bus": eingabe_bus,
-        "zug": eingabe_zug
+        "bus": lambda: eingabe_hat_ticket("bus"),
+        "zug": lambda: eingabe_hat_ticket("zug")
     }
 
-    # Rufe die entsprechende Funktion auf
     return mapping[transportmittel_input]()
 
 
@@ -46,7 +45,7 @@ def frage_reisezeit() -> float:
     return get_float_input("Gebe die Reisezeit in Stunden ein: ")
 
 
-def eingabe_auto():
+def eingabe_auto() -> dict:
     strecke = frage_strecke()
     reisezeit = frage_reisezeit()
     spritkosten = float(input("Wie viel kostet 1L Sprit? (z.B. 1,74): ").replace(',', '.'))
@@ -60,7 +59,7 @@ def eingabe_auto():
     }
 
 
-def eingabe_fahrrad():
+def eingabe_fahrrad() -> dict:
     strecke = frage_strecke()
     koerpergewicht = float(input("Gebe dein Körpergewicht in kg ein: ").replace(',', '.'))
     skill_level = int(input("Gebe dein Skill Level an (1, 2, 3): "))
@@ -72,6 +71,7 @@ def eingabe_fahrrad():
     }
 
 
+'''
 def eingabe_bus():
     strecke = frage_strecke()
     reisezeit = frage_reisezeit()
@@ -90,6 +90,28 @@ def eingabe_zug():
     ticketpreis = float(input("Wie viel kostet das Zugticket in Euro?: ").replace(',', '.'))
     return {
         "transportmittel": "zug",
+        "strecke": strecke,
+        "reisezeit": reisezeit,
+        "ticketpreis": ticketpreis
+    }
+'''
+
+
+def eingabe_hat_ticket(transportmittel: str) -> dict:
+    """
+    Für alle Transportmittel mit Ticket.
+
+    Args:
+        transportmittel (str): Das jeweilige Transportmittel (Bus, Zug, ...)
+
+    Returns:
+        dict: Alle relevanten Angaben für das Transportmittel
+    """
+    strecke = frage_strecke()
+    reisezeit = frage_reisezeit()
+    ticketpreis = float(input("Wie viel kostet das Ticket in Euro?: ").replace(',', '.'))
+    return {
+        "transportmittel": transportmittel,
         "strecke": strecke,
         "reisezeit": reisezeit,
         "ticketpreis": ticketpreis
