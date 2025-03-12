@@ -6,13 +6,15 @@
 
 Mit diesem Programm kannst du die Reisekosten für verschiedene Transportmittel ermitteln – passend zu deinem Budget.
 
-## Programm-beispiel
-WIP
+## So funktioniert’s
+![wireframe gif](https://github.com/user-attachments/assets/42685707-5df8-43e0-a32c-29aac425b682)
+
+[Link zur wiki](https://github.com/windrunnerz/travel-cost-evaluator/wiki/Roadmap#geplante-gui-mockup)
 
 ## Installation
 WIP
 
-#  Projekt-Roadmap: Travel Cost Evaluator
+#  Projekt-Roadmap
 
 ## Ziel
 * Dieses Projekt soll ein Tool zur Berechnung und zum Vergleich von Reisekosten bieten. 
