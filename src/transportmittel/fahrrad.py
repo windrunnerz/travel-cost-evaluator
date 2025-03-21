@@ -50,7 +50,6 @@ class Fahrrad(Transportmittel):
 
         return kalorienverbrauch, kosten, self.reisezeit, anzahl_doener
 
-
     def ausgabe_details(self):
         """
         Gibt die berechneten Werte für die Fahrradfahrt formatiert aus.

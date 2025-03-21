@@ -26,6 +26,7 @@ WIP
 ### In Arbeit
 - [ ] Tests für alle Transportmittel-Klassen schreiben
 - [ ] Verbesserung der Dokumentation (README, UML-Diagramme, Projekt-Doku, Code-Doku)
+- [ ] `ReiseIO`-Klasse optimieren und Unit-test schreiben
 
 ###  Nächste Schritte
 - [ ] Speicherung von Berechnungen als JSON-Datei
@@ -34,7 +35,7 @@ WIP
 - [ ] GUI-Implementierung mit PySide6
 - [ ] Benutzerfreundlichere CLI-Eingaben
 - [ ] Kernlogik kapseln → eigenes Modul für Berechnungen ❓❓❓
-- [ ] `ReiseIO`-Klasse optimieren und Unit-test schreiben
+
 
 ### ✅ Abgeschlossen
 - [x] Factory Pattern für Transportmittel implementiert

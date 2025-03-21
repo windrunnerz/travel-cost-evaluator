@@ -1,3 +1,7 @@
+VERBRAUCH_AUTO: float = 5   # L/km
+SPRITKOSTEN_AUTO: float = 1.7   # €/L
+
+
 def frage_transportmittel() -> dict:
     """
     Zentrale Eingabefunktion, die alles koordiniert.
@@ -13,12 +17,11 @@ def frage_transportmittel() -> dict:
         else:
             print("Transportmittel nur Auto, Bus, Zug oder Fahrrad möglich! Bitte erneut eingeben.")
 
-    # Mapping: Verknüpfe den Input mit der entsprechenden Eingabefunktion
     mapping = {
-        "auto": eingabe_auto,
-        "fahrrad": eingabe_fahrrad,
-        "bus": lambda: eingabe_hat_ticket("bus"),
-        "zug": lambda: eingabe_hat_ticket("zug")
+        "auto": _eingabe_auto,
+        "fahrrad": _eingabe_fahrrad,
+        "bus": lambda: _eingabe_hat_ticket("bus"),
+        "zug": lambda: _eingabe_hat_ticket("zug")
     }
 
     return mapping[transportmittel_input]()
@@ -51,11 +54,11 @@ def frage_reisezeit() -> float:
     return get_float_input("Gebe die Reisezeit in Stunden ein: ")
 
 
-def eingabe_auto() -> dict:
+def _eingabe_auto() -> dict:
     strecke = frage_strecke()
     reisezeit = frage_reisezeit()
-    spritkosten = float(input("Wie viel kostet 1L Sprit? (z.B. 1,74): ").replace(',', '.'))
-    verbrauch = float(input("Wie viel verbraucht das Auto auf 100km?: ").replace(',', '.'))
+    spritkosten = SPRITKOSTEN_AUTO
+    verbrauch = VERBRAUCH_AUTO
     return {
         "transportmittel": "auto",
         "strecke": strecke,
@@ -65,7 +68,7 @@ def eingabe_auto() -> dict:
     }
 
 
-def eingabe_fahrrad() -> dict:
+def _eingabe_fahrrad() -> dict:
     strecke = frage_strecke()
     koerpergewicht = float(input("Gebe dein Körpergewicht in kg ein: ").replace(',', '.'))
     skill_level = int(input("Gebe dein Skill Level an (1, 2, 3): "))
@@ -103,7 +106,7 @@ def eingabe_zug():
 '''
 
 
-def eingabe_hat_ticket(transportmittel: str) -> dict:
+def _eingabe_hat_ticket(transportmittel: str) -> dict:
     """
     Für alle Transportmittel mit Ticket.
 
