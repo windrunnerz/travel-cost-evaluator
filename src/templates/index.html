@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Cost Evaluator</title>
+</head>
+<body>
+    <h1>Reisekosten berechnen</h1>
+    <form id="kostenForm">
+        <input type="number" id="strecke" placeholder="Strecke (km)" required><br>
+        <input type="number" id="verbrauch" placeholder="Verbrauch (l/100km)" required><br>
+        <input type="number" id="kosten" placeholder="Kosten pro Liter (€)" step="0.01" required><br>
+        <input type="number" id="mitfahrer" placeholder="Mitfahrer" value="1" min="1" required><br>
+        <button type="submit">Berechnen</button>
+    </form>
+    <div id="ergebnis"></div>
+
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

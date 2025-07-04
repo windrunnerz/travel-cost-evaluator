@@ -1,2 +1,18 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+
 # PyCharm project files
 .idea/
+
+# VS Code settings (falls du VS Code verwendest)
+.vscode/
+
+# Sonstige Python-Umgebungsdateien
+*.egg-info/
+dist/
+build/
