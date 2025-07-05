@@ -23,21 +23,27 @@ WIP
 
 ## Geplante Features/Tasks
 
-### In Arbeit
+### 🚧 In Arbeit
 - [ ] Tests für alle Transportmittel-Klassen schreiben
 - [ ] Verbesserung der Dokumentation (README, UML-Diagramme, Projekt-Doku, Code-Doku)
-- [ ] `ReiseIO`-Klasse optimieren und Unit-test schreiben
+- [ ] Backend-Validierung verbessern (saubere Fehlerantworten in Flask)
+- [ ] Frontend-Validierung ergänzen (z. B. keine negativen Werte, nur Zahlen)
 
-###  Nächste Schritte
-- [ ] Speicherung von Berechnungen als JSON-Datei
-- [ ] Vergleich von 2 oder mehr Transportmitteln
-- [ ] Weitere Transportmittel hinzufügen (Flugzeug, E-Scooter)
+### 🔜 Nächste Schritte
+- [ ] API-Routen mit Flask Blueprints modularisieren
+- [ ] Berechnungslogik in separates Python-Modul auslagern (z. B. `utils.py`)
+- [ ] Speicherung von Berechnungen (optional JSON-Datei oder DB)
+- [ ] Vergleich von zwei oder mehr Transportmitteln ermöglichen
+- [ ] Weitere Transportmittel hinzufügen (Flugzeug, E-Scooter, Carsharing)
 - [ ] GUI-Implementierung mit PySide6
 - [ ] Benutzerfreundlichere CLI-Eingaben
-- [ ] Kernlogik kapseln → eigenes Modul für Berechnungen ❓❓❓
-
+- [ ] Kernlogik kapseln → eigenes Modul für Berechnungen (in Kombi mit `utils.py`)
+- [ ] Frontend Styling verbessern (CSS oder Framework)
+- [ ] Ergebnisdarstellung verbessern (z. B. farbliche Hervorhebung)
+- [ ] Deployment vorbereiten (z. B. Render, Fly.io)
 
 ### ✅ Abgeschlossen
 - [x] Factory Pattern für Transportmittel implementiert
 - [x] Modularisierung des Codes
-
+- [x] Refactor: API & DOM in JS aufgeteilt
+- [x] `ReiseIO`-Klasse optimieren und Unit-Tests schreiben

@@ -19,7 +19,7 @@ function renderHistory(historyArray) {
             `<li>
             Strecke: ${entry.strecke} km, 
             Verbrauch: ${entry.verbrauch} l/100km, 
-            Kosten: ${entry.gesamtkosten} €, 
+            Geamtkosten: ${entry.gesamtkosten} €, 
             Kosten/Person: ${entry.kosten_pro_person} €
             </li>`;
     });

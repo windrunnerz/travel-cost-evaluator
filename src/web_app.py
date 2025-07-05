@@ -16,32 +16,32 @@ def evaluate():
     data = request.json
 
     try:
-        strecke = data.get("strecke_km")
-        verbrauch = data.get("verbrauch_l_pro_100km")
-        kosten = data.get("kosten_pro_liter")
-        mitfahrer = data.get("mitfahrer_anzahl")
+        strecke = data.get("strecke_km") # type: ignore
+        verbrauch = data.get("verbrauch_l_pro_100km") # type: ignore
+        spritkosten = data.get("kosten_pro_liter") # type: ignore
+        mitfahrer = data.get("mitfahrer_anzahl") # type: ignore
     except (TypeError, ValueError):
         return jsonify({"error": "Ungültige oder fehlende Werte."}), 400
 
-    gesamtkosten = (strecke / 100) * verbrauch * kosten
+    gesamtkosten = round((strecke / 100) * verbrauch * spritkosten, 2)
 
     if mitfahrer and mitfahrer > 0:
-        kosten_pro_person = gesamtkosten / mitfahrer
+        kosten_pro_person = round(gesamtkosten / mitfahrer, 2)
     else:
         kosten_pro_person = gesamtkosten
 
     history_list.append({
         "strecke": strecke,
         "verbrauch": verbrauch,
-        "kosten": kosten,
+        "spritkosten": spritkosten,
         "mitfahrer": mitfahrer,
         "gesamtkosten": gesamtkosten,
         "kosten_pro_person": kosten_pro_person
     })
 
     return jsonify({
-        "gesamtkosten": round(gesamtkosten, 2),
-        "kosten_pro_person": round(kosten_pro_person, 2)
+        "gesamtkosten": gesamtkosten,
+        "kosten_pro_person": kosten_pro_person
     })
 
 

@@ -10,7 +10,8 @@ async function evaluateKosten(data) {
     });
 
     if (!response.ok) {
-        throw new Error(`Server-Fehler: ${response.status}`);
+        const errorData = await response.json();
+        throw new Error(errorData.error || `Server-Fehler: ${response.status}`);
     }
 
     return await response.json(); 
