@@ -1,10 +1,15 @@
+"""Web-App-Modul: Flask API mit verschiedenen Frontend-Routen"""
+
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
+history_list = []
+
 
 @app.route("/")
 def home():
     return render_template("index.html")
+
 
 @app.route("/api/evaluate", methods=["POST"])
 def evaluate():
@@ -25,10 +30,25 @@ def evaluate():
     else:
         kosten_pro_person = gesamtkosten
 
+    history_list.append({
+        "strecke": strecke,
+        "verbrauch": verbrauch,
+        "kosten": kosten,
+        "mitfahrer": mitfahrer,
+        "gesamtkosten": gesamtkosten,
+        "kosten_pro_person": kosten_pro_person
+    })
+
     return jsonify({
         "gesamtkosten": round(gesamtkosten, 2),
         "kosten_pro_person": round(kosten_pro_person, 2)
     })
+
+
+@app.route("/api/history", methods=["GET"])
+def show_history():
+    return jsonify(history_list)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

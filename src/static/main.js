@@ -1,12 +1,18 @@
+import { evaluateKosten } from "./api";
+import { getInputNumber, getInputInt, setResultText } from "./dom";
+
+
 const form = document.getElementById("kostenForm");
+const historyButton = document.getElementById("historyButton");
+
 
 form.addEventListener("submit", async function(e) {
     e.preventDefault();
 
-    const strecke = parseFloat(document.getElementById("strecke").value);
-    const verbrauch = parseFloat(document.getElementById("verbrauch").value);
-    const kosten = parseFloat(document.getElementById("kosten").value);
-    const mitfahrer = parseInt(document.getElementById("mitfahrer").value);
+    const strecke = getInputNumber("strecke");
+    const verbrauch = getInputNumber("verbrauch");
+    const kosten = getInputNumber("kosten");
+    const mitfahrer = getInputInt("mitfahrer");
 
     const data = {
         strecke_km: strecke,
@@ -15,16 +21,29 @@ form.addEventListener("submit", async function(e) {
         mitfahrer_anzahl: mitfahrer
     };
 
-    const response = await fetch("/api/evaluate", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
+    const result = await evaluateKosten(data);
+
+    setResultText(`Gesamtkosten: ${result.gesamtkosten} €, Kosten pro Person ${result.kosten_pro_person} €`);
+
+});
+
+
+historyButton.addEventListener("click", async function() {
+    const response = await fetch("/api/history");
+    const history = await response.json();
+
+    let html = "<h3>Historie</h3><ul>";
+    history.forEach(entry => {
+        html += 
+            `<li>
+            Strecke: ${entry.strecke} km, 
+            Verbrauch: ${entry.verbrauch} l/100km, 
+            Kosten: ${entry.gesamtkosten} €, 
+            Kosten/Person: ${entry.kosten_pro_person} €
+            </li>`;
     });
 
-    const result = await response.json();
+    html += "</ul>";
 
-    document.getElementById("ergebnis").innerText =
-        `Gesamtkosten: ${result.gesamtkosten} €, Kosten pro Person ${result.kosten_pro_person} €`;
-});
+    document.getElementById("historyOutput").innerHTML = html;
+})
