@@ -16,4 +16,15 @@ async function evaluateKosten(data) {
     return await response.json(); 
 };
 
-export { evaluateKosten };
+
+async function fetchHistory() {
+    const response = await fetch("/api/history");
+
+    if (!response.ok) {
+        throw new Error(`Server-Fehler: ${response.status}`);
+    }
+
+    return await response.json();
+}
+
+export { evaluateKosten, fetchHistory };

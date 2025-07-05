@@ -1,5 +1,5 @@
-import { evaluateKosten } from "./api";
-import { getInputNumber, getInputInt, setResultText } from "./dom";
+import { evaluateKosten, fetchHistory } from "./api.js";
+import { getInputNumber, getInputInt, setResultText, renderHistory } from "./dom.js";
 
 
 const form = document.getElementById("kostenForm");
@@ -29,21 +29,10 @@ form.addEventListener("submit", async function(e) {
 
 
 historyButton.addEventListener("click", async function() {
-    const response = await fetch("/api/history");
-    const history = await response.json();
-
-    let html = "<h3>Historie</h3><ul>";
-    history.forEach(entry => {
-        html += 
-            `<li>
-            Strecke: ${entry.strecke} km, 
-            Verbrauch: ${entry.verbrauch} l/100km, 
-            Kosten: ${entry.gesamtkosten} €, 
-            Kosten/Person: ${entry.kosten_pro_person} €
-            </li>`;
-    });
-
-    html += "</ul>";
-
-    document.getElementById("historyOutput").innerHTML = html;
-})
+    try {
+        const history = await fetchHistory();
+        renderHistory(history);
+    } catch (error) {
+        console.error();        
+    }
+});

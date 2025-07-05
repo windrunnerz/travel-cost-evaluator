@@ -12,4 +12,21 @@ function setResultText(text) {
     document.getElementById("ergebnis").innerText = text;
 }
 
-export { getInputNumber, getInputInt, setResultText };
+function renderHistory(historyArray) {
+    let html = "<h3>Historie</h3><ul>";
+    historyArray.forEach(entry => {
+        html += 
+            `<li>
+            Strecke: ${entry.strecke} km, 
+            Verbrauch: ${entry.verbrauch} l/100km, 
+            Kosten: ${entry.gesamtkosten} €, 
+            Kosten/Person: ${entry.kosten_pro_person} €
+            </li>`;
+    });
+    html += "</ul>";
+    
+    document.getElementById("historyOutput").innerHTML = html;
+}
+
+
+export { getInputNumber, getInputInt, setResultText, renderHistory };
