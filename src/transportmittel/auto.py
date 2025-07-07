@@ -12,7 +12,7 @@ class Auto(Transportmittel):
         # self.spritkosten gespeichert. Durch das Präfix self. wird das Attribut dem aktuellen Objekt der Klasse
         # zugeordnet
 
-    def berechne_kosten(self):
+    def berechne_kosten(self) -> float:
         return (self.strecke / 100) * self.verbrauch * self.spritkosten
         # Rückgabewert, damit das Ergebnis der Kostenberechnung außerhalb der Funktion/Klasse verwendet werden kann
 

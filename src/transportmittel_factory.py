@@ -1,20 +1,19 @@
 from . import Auto, Fahrrad, Bus, Zug
 
 
-def create_transportmittel(benutzer_eingaben):
-    typ = benutzer_eingaben["transportmittel"]
-
+def create_transportmittel(typ_or_dict):
     klassen_mapping = {
         "auto": Auto,
         "fahrrad": Fahrrad,
         "bus": Bus,
         "zug": Zug
     }
-
-    if typ not in klassen_mapping:
-        raise ValueError(f"Unbekanntes Transportmittel: {typ}")
-
-    argumente = {k: v for k, v in benutzer_eingaben.items() if k != "transportmittel"}
-
-    return klassen_mapping[typ](**argumente)
-    # klasse = klassen_mapping[typ]
+    # CLI-Modus: dict übergeben
+    if isinstance(typ_or_dict, dict):
+        typ = typ_or_dict["transportmittel"]
+        argumente = {k: v for k, v in typ_or_dict.items() if k != "transportmittel"}
+        return klassen_mapping[typ](**argumente)
+   
+    # Web-Modus: typ als String übergeben
+    typ = typ_or_dict
+    return klassen_mapping[typ]

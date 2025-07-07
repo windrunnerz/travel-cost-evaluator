@@ -1,6 +1,7 @@
 """Web-App-Modul: Flask API mit verschiedenen Frontend-Routen"""
 
 from flask import Flask, render_template, request, jsonify
+from .services import berechne_reisekosten_service
 
 app = Flask(__name__)
 history_list = []
@@ -14,35 +15,26 @@ def home():
 @app.route("/api/evaluate", methods=["POST"])
 def evaluate():
     data = request.json
-
-    try:
-        strecke = data.get("strecke_km") # type: ignore
-        verbrauch = data.get("verbrauch_l_pro_100km") # type: ignore
-        spritkosten = data.get("kosten_pro_liter") # type: ignore
-        mitfahrer = data.get("mitfahrer_anzahl") # type: ignore
-    except (TypeError, ValueError):
+    if data is None:
         return jsonify({"error": "Ungültige oder fehlende Werte."}), 400
 
-    gesamtkosten = round((strecke / 100) * verbrauch * spritkosten, 2)
+    strecke = data.get("strecke_km")
+    reisezeit = data.get("reisezeit")
+    verbrauch = data.get("verbrauch_l_pro_100km")
+    spritkosten = data.get("spritkosten_pro_liter")
+    mitfahrer = data.get("mitfahrer_anzahl")
+    fahrzeug_typ = data.get("fahrzeug_typ")
+       
+    result = berechne_reisekosten_service(
+        fahrzeug_typ,
+        strecke,
+        reisezeit,
+        verbrauch,
+        spritkosten,
+        mitfahrer
+    )
 
-    if mitfahrer and mitfahrer > 0:
-        kosten_pro_person = round(gesamtkosten / mitfahrer, 2)
-    else:
-        kosten_pro_person = gesamtkosten
-
-    history_list.append({
-        "strecke": strecke,
-        "verbrauch": verbrauch,
-        "spritkosten": spritkosten,
-        "mitfahrer": mitfahrer,
-        "gesamtkosten": gesamtkosten,
-        "kosten_pro_person": kosten_pro_person
-    })
-
-    return jsonify({
-        "gesamtkosten": gesamtkosten,
-        "kosten_pro_person": kosten_pro_person
-    })
+    return jsonify(result)
 
 
 @app.route("/api/history", methods=["GET"])

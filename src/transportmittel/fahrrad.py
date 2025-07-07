@@ -19,7 +19,7 @@ class Fahrrad(Transportmittel):
         self.koerpergewicht = koerpergewicht
         self.skill_level = skill_level
 
-    def berechne_kosten(self):
+    def berechne_kosten(self) -> tuple[float, float, float, float]:
         """
         Berechnet Kalorienverbrauch und hypothetischen Kosten.
 
