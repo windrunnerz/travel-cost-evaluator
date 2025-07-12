@@ -58,6 +58,7 @@ def berechne_reisekosten_service(
             kosten_pro_person = berechne_kosten_pro_person(gesamtkosten, mitfahrer)
 
             return {
+                "fahrzeugTyp": fahrzeug_typ,
                 "gesamtkosten": round(gesamtkosten),
                 "kostenProPerson": kosten_pro_person
             }
@@ -73,10 +74,11 @@ def berechne_reisekosten_service(
             kalorienverbrauch, kosten, reisezeit, anzahl_doener = fahrrad_objekt.berechne_kosten() # type: ignore
             
             return {
-                "kalorienverbrauch": kalorienverbrauch,
-                "kosten": kosten,
-                "reisezeit": reisezeit,
-                "anzahlDoener": anzahl_doener
+                "fahrzeugTyp": fahrzeug_typ,
+                "kalorienverbrauch": round(kalorienverbrauch, 2),
+                "gesamtkosten": round(kosten, 2),
+                "reisezeit": round(reisezeit, 2),
+                "anzahlDoener": round(anzahl_doener)
             }
             
         case "bus" | "zug":
@@ -91,6 +93,7 @@ def berechne_reisekosten_service(
             kosten_pro_person = berechne_kosten_pro_person(gesamtkosten, mitfahrer)
 
             return {
+                "fahrzeugTyp": fahrzeug_typ,
                 "gesamtkosten": gesamtkosten,
                 "kostenProPerson": kosten_pro_person
             }

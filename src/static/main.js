@@ -1,6 +1,13 @@
 import { evaluateKosten, fetchHistory } from "./api.js";
-import { getInputNumber, getInputInt, setResultText, renderHistory, showFieldsForType } from "./dom.js";
-import { showError, clearError, validateNumber, notEmpty } from "./utils.js";
+import { showError, clearError, validateNumber, notEmpty, buildOutputText, resultFieldMapping } from "./utils.js";
+import {
+    getInputNumber,
+    getInputInt,
+    setResultText,
+    renderHistory,
+    showFieldsForType,
+    toggleElementVisibility
+} from "./dom.js";
 
 
 const kostenForm = document.getElementById("kostenForm");
@@ -21,9 +28,14 @@ kostenForm.addEventListener("submit", async function(e) {
     const spritkosten = getInputNumber("spritkosten");
 
     const koerperGewicht = getInputNumber("koerperGewicht");
-    const skillLevel = parseInt(document.getElementById("skillLevel").value);
+    const skillLevel = getInputInt("skillLevel");
 
     const ticketPreis = getInputNumber("ticketPreis"); 
+
+    if (!notEmpty(selected)) {
+        showError("fahrzeugTypError", "Bitte Fahrzeug auswählen.");
+        return;
+    }
 
     clearError();
 
@@ -47,12 +59,6 @@ kostenForm.addEventListener("submit", async function(e) {
         numericValidations.push(
             {value: ticketPreis, min: 1, message: "Bitte Ticketpreis eingeben.", errorID: "ticketPreisError"}
         );
-    }
-
-
-    if (!notEmpty(selected)) {
-        showError("fahrzeugTypError", "Bitte Fahrzeug auswählen.");
-        return;
     }
 
     for (const validation of numericValidations) {
@@ -82,9 +88,10 @@ kostenForm.addEventListener("submit", async function(e) {
 
     try {
         const result = await evaluateKosten(data);
-        setResultText(`Gesamtkosten: ${result.gesamtkosten} €, Kosten pro Person ${result.kosten_pro_person} €`);
+        const outputText = buildOutputText(result, resultFieldMapping);
+        setResultText(outputText);
         
-        document.getElementById("historyButton").classList.remove("hidden");
+        toggleElementVisibility("historyButton");
     } catch (error) {
         showError("globalError", error.message);
     }
@@ -101,6 +108,6 @@ historyButton.addEventListener("click", async function() {
         const history = await fetchHistory();
         renderHistory(history);
     } catch (error) {
-        console.error();        
+        console.error(error);        
     }
 });

@@ -1,5 +1,7 @@
 // Modul für DOM-Interaktionen: liest Formwerte aus und setzt Inhalte in die Oberfläche.
 
+import { buildOutputText, historyFieldMapping } from "./utils.js";
+
 export function getInputNumber(id) {
     return parseFloat(document.getElementById(id).value);
 }
@@ -14,36 +16,39 @@ export function setResultText(text) {
 
 export function renderHistory(historyArray) {
     let html = "<h3>Historie</h3><ul>";
+
     historyArray.forEach(entry => {
-        html += 
-            `<li>
-            Strecke: ${entry.strecke} km, 
-            Verbrauch: ${entry.verbrauch} l/100km, 
-            Geamtkosten: ${entry.gesamtkosten} €, 
-            Kosten/Person: ${entry.kosten_pro_person} €
-            </li>`;
+        const liContent = buildOutputText(entry, historyFieldMapping);
+        html += `<li>${liContent}</li>`;
     });
+
     html += "</ul>";
-    
     document.getElementById("historyOutput").innerHTML = html;
 }
 
-export function showFieldsForType(selected) {
-    document.getElementById("defaultFields").classList.remove("hidden");
-    document.querySelector('button[type="submit"]').classList.remove("hidden");
-
-    document.getElementById("autoFields").classList.add("hidden");
-    document.getElementById("fahrradFields").classList.add("hidden");
-    document.getElementById("ticketFields").classList.add("hidden");
-
-    if (selected === "auto") {
-        document.getElementById("autoFields").classList.remove("hidden");
-    }
-    else if (selected === "fahrrad") {
-        document.getElementById("fahrradFields").classList.remove("hidden");
-    }
-    else if (selected === "bus" || selected === "zug") {
-        document.getElementById("ticketFields").classList.remove("hidden");
+export function toggleElementVisibility(id, show = true) {
+    if (show === true) {
+        document.getElementById(id).classList.remove("hidden");
+    } else {
+        document.getElementById(id).classList.add("hidden");
     }
 }
 
+export function showFieldsForType(selected) {
+    toggleElementVisibility("defaultFields");
+    toggleElementVisibility("berechnenButton");
+
+    toggleElementVisibility("autoFields", false);
+    toggleElementVisibility("fahrradFields", false);
+    toggleElementVisibility("ticketFields", false);
+
+    if (selected === "auto") {
+        toggleElementVisibility("autoFields");
+    }
+    else if (selected === "fahrrad") {
+        toggleElementVisibility("fahrradFields");
+    }
+    else if (selected === "bus" || selected === "zug") {
+        toggleElementVisibility("ticketFields");
+    }
+}

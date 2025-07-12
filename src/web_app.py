@@ -17,7 +17,7 @@ für weitere Funktionalitäten genutzt werden.
 
 from flask import Flask, render_template, request, jsonify
 from .services import berechne_reisekosten_service
-import logging
+from .utils import convert_snake_to_camel
 
 app = Flask(__name__)
 history_list = []
@@ -62,14 +62,16 @@ def evaluate():
     )
 
     history_list.append(result)
-    return jsonify(result)
+    camel_result = convert_snake_to_camel(result)
+    return jsonify(camel_result)
 
 
 
 @app.route("/api/history", methods=["GET"])
 def show_history():
     """Zeigt eine Liste der Ergebnisse"""
-    return jsonify(history_list)
+    camel_history = [convert_snake_to_camel(entry) for entry in history_list]
+    return jsonify(camel_history)
 
 
 if __name__ == "__main__":
