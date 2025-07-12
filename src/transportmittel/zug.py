@@ -2,12 +2,12 @@ from src.transportmittel import Transportmittel
 
 
 class Zug(Transportmittel):
-    def __init__(self, strecke, reisezeit, ticketpreis):
+    def __init__(self, strecke, reisezeit, ticket_preis):
         super().__init__(strecke, reisezeit)
-        self.ticketpreis = ticketpreis
+        self.ticket_preis = ticket_preis
 
     def berechne_kosten(self):
-        return self.ticketpreis
+        return float(self.ticket_preis)
 
     def ausgabe_details(self):
         kosten = self.berechne_kosten()

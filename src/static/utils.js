@@ -18,6 +18,9 @@ function clearError() {
     showError("spritkostenError", "");
     showError("mitfahrerError", "");
     showError("fahrzeugTypError", "");
+    showError("koerperGewichtError", "");
+    showError("skillLevelError", "");
+    showError("ticketPreisError", "");
     showError("globalError", "");
 }
 

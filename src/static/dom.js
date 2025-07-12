@@ -1,18 +1,18 @@
 // Modul für DOM-Interaktionen: liest Formwerte aus und setzt Inhalte in die Oberfläche.
 
-function getInputNumber(id) {
+export function getInputNumber(id) {
     return parseFloat(document.getElementById(id).value);
 }
 
-function getInputInt(id) {
+export function getInputInt(id) {
     return parseInt(document.getElementById(id).value);
 }
 
-function setResultText(text) {
+export function setResultText(text) {
     document.getElementById("ergebnis").innerText = text;
 }
 
-function renderHistory(historyArray) {
+export function renderHistory(historyArray) {
     let html = "<h3>Historie</h3><ul>";
     historyArray.forEach(entry => {
         html += 
@@ -28,5 +28,22 @@ function renderHistory(historyArray) {
     document.getElementById("historyOutput").innerHTML = html;
 }
 
+export function showFieldsForType(selected) {
+    document.getElementById("defaultFields").classList.remove("hidden");
+    document.querySelector('button[type="submit"]').classList.remove("hidden");
 
-export { getInputNumber, getInputInt, setResultText, renderHistory };
+    document.getElementById("autoFields").classList.add("hidden");
+    document.getElementById("fahrradFields").classList.add("hidden");
+    document.getElementById("ticketFields").classList.add("hidden");
+
+    if (selected === "auto") {
+        document.getElementById("autoFields").classList.remove("hidden");
+    }
+    else if (selected === "fahrrad") {
+        document.getElementById("fahrradFields").classList.remove("hidden");
+    }
+    else if (selected === "bus" || selected === "zug") {
+        document.getElementById("ticketFields").classList.remove("hidden");
+    }
+}
+
