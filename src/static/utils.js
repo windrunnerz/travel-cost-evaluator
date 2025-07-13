@@ -8,22 +8,6 @@ export function notEmpty(value) {
     return value !== undefined && value !== null && value !== ""; // !!value
 }
 
-export function showError(errorID, message) {
-    document.getElementById(errorID).innerText = message;
-}
-
-export function clearError() {
-    showError("streckeError", "");
-    showError("verbrauchError", "");
-    showError("spritkostenError", "");
-    showError("mitfahrerError", "");
-    showError("fahrzeugTypError", "");
-    showError("koerperGewichtError", "");
-    showError("skillLevelError", "");
-    showError("ticketPreisError", "");
-    showError("globalError", "");
-}
-
 export function buildOutputText(obj, fieldMapping) {
     let output = "";
 

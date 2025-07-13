@@ -1,12 +1,15 @@
 import { evaluateKosten, fetchHistory } from "./api.js";
-import { showError, clearError, validateNumber, notEmpty, buildOutputText, resultFieldMapping } from "./utils.js";
+import { validateNumber, notEmpty, buildOutputText, resultFieldMapping } from "./utils.js";
 import {
     getInputNumber,
     getInputInt,
     setResultText,
     renderHistory,
     showFieldsForType,
-    toggleElementVisibility
+    toggleElementVisibility,
+    showError,
+    clearError,
+    clearInputs,
 } from "./dom.js";
 
 
@@ -99,6 +102,13 @@ kostenForm.addEventListener("submit", async function(e) {
 
 fahrzeugTypSelect.addEventListener("change", async function () {
     const selected = fahrzeugTypSelect.value;
+    const fieldContainers = ["defaultFields", "autoFields", "fahrradFields", "ticketFields"];
+
+    fieldContainers.forEach(id => {
+        clearInputs(id);
+    });
+
+    clearError();
     showFieldsForType(selected);
 });
 

@@ -17,13 +17,13 @@ Für maximale Flexibilität sind manche Parameter optional und können mit Defau
 erfolgt abhängig vom gewählten Fahrzeugtyp in web_app.py.
 """
 
-import logging
+# from flask import current_app
 from .transportmittel.transportmittel import TransportmittelProtocol
 from .transportmittel_factory import create_transportmittel
 from .utils import berechne_kosten_pro_person
 
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
+# logging.basicConfig(level=logging.DEBUG)
+# logger = logging.getLogger(__name__)
 
 def berechne_reisekosten_service(
     fahrzeug_typ,

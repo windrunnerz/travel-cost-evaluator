@@ -15,7 +15,7 @@ Zusätzliche Routen (z.B. '/api/history') können unabhängig von der Hauptberec
 für weitere Funktionalitäten genutzt werden.
 """
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify# , current_app
 from .services import berechne_reisekosten_service
 from .utils import convert_snake_to_camel
 
